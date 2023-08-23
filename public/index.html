@@ -7,14 +7,15 @@
 </head>
 <body>
   <h1>Temperature Monitor</h1>
-  <div id="temperature-chart"></div>
+  <div id="temperature"></div>
   <script src="/socket.io/socket.io.js"></script>
   <script>
+    const temperatureDisplay = document.getElementById('temperature');
+
     const socket = io();
 
     socket.on('temperature', (temperatura) => {
-      // Update temperature chart or display
-      console.log('Temperature:', temperatura);
+      temperatureDisplay.textContent = `Temperature: ${temperatura.toFixed(2)}°C`;
     });
   </script>
 </body>
