@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Temperature Monitor</title>
+  <title>Temperatura Monitor</title>
 </head>
 <body>
-  <h1>Temperature Monitor</h1>
+  <h1>Temperatura Monitor</h1>
   <div id="temperature"></div>
   <script src="/socket.io/socket.io.js"></script>
   <script>
@@ -15,7 +15,7 @@
     const socket = io();
 
     socket.on('temperature', (temperatura) => {
-      temperatureDisplay.textContent = `Temperature: ${temperatura.toFixed(2)}°C`;
+      temperatureDisplay.textContent = `Temperatura: ${temperatura.toFixed(2)}°C`;
     });
   </script>
 </body>

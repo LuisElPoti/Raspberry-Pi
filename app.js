@@ -2,14 +2,14 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const socketIO = require('socket.io');
-const Gpio = require('onoff').Gpio;
+//const Gpio = require('onoff').Gpio;
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-const ledRed = new Gpio(24, 'out');
-const ledGreen = new Gpio(25, 'out');
+//const ledRed = new Gpio(24, 'out');
+//const ledGreen = new Gpio(25, 'out');
 const temperaturaUmbral = 25.0;
 
 let simulatedTemperatura = 20.0; // Initial simulated temperature
@@ -26,13 +26,13 @@ io.on('connection', (socket) => {
 
     socket.emit('temperature', simulatedTemperatura);
 
-    if (simulatedTemperatura > temperaturaUmbral) {
-      ledRed.writeSync(1);
-      ledGreen.writeSync(0);
-    } else {
-      ledRed.writeSync(0);
-      ledGreen.writeSync(1);
-    }
+    // if (simulatedTemperatura > temperaturaUmbral) {
+    //   ledRed.writeSync(1);
+    //   ledGreen.writeSync(0);
+    // } else {
+    //   ledRed.writeSync(0);
+    //   ledGreen.writeSync(1);
+    // }
   }, 5000);
 
   socket.on('disconnect', () => {
