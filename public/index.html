@@ -1,22 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Temperatura Monitor</title>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Sensor de temperatura - By Parzibyte</title>
+    <link rel='stylesheet' href='https://unpkg.com/bulma@0.9.1/css/bulma.min.css'>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  socket.on('connect', () => {
+    console.log('Connected to server');
+  });
+
+  socket.on('temperature', (temperature) => {
+    const temperaturaElement = document.querySelector('#temperatura');
+    temperaturaElement.textContent = `${temperature} °C`;
+  });
+
+  socket.on('humidity', (humidity) => {
+    const humedadElement = document.querySelector('#humedad');
+    humedadElement.textContent = `${humidity} %`;
+  });
+</script>
 <body>
-  <h1>Temperatura Monitor</h1>
-  <div id="temperature"></div>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const temperatureDisplay = document.getElementById('temperature');
-
-    const socket = io();
-
-    socket.on('temperature', (temperatura) => {
-      temperatureDisplay.textContent = `Temperatura: ${temperatura.toFixed(2)}°C`;
-    });
-  </script>
+    <section id='app' class='hero is-link is-fullheight'>
+        <div class='hero-body'>
+            <div class='container'>
+                <div class='columns has-text-centered'>
+                    <div class='column'>
+                        <h1 style='font-size: 2.5rem'>Termómetro</h1>
+                        <i class='fa fa-thermometer-half' style='font-size: 4rem;'></i>
+                    </div>
+                </div>
+                <div class='columns'>
+                    <div class='column has-text-centered'>
+                        <h2 class='is-size-4 has-text-warning'>Temperatura</h2>
+                        <h2 class='is-size-1' id='temperatura'></h2>
+                    </div>
+                    <div class='column has-text-centered'>
+                        <h2 class='is-size-4 has-text-warning'>Humedad</h2>
+                        <h2 class='is-size-1' id='humedad'></h2>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>
